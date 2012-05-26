@@ -6,11 +6,11 @@ class AddYardDocs(sublime_plugin.TextCommand):
     for selection in reversed(self.view.sel()):
       current_line_region = self.view.line(selection)
       current_line = self.view.substr(current_line_region)
-      if 'def ' not in current_line:
-        continue
+      
+      params_match = re.search('def +[^ (]+[ (]*([^)]*)\)?', current_line)
+      if not params_match: return
 
-      params_match = re.search('\((.*)\)', current_line)
-      params = [p.strip() for p in params_match.group(1).split(',')]
+      params = [p.strip() for p in params_match.group(1).split(',') if len(p.strip()) > 0]
 
       indent = re.search('(^ *)', current_line).group(0)
 
