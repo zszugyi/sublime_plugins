@@ -1,3 +1,12 @@
 [
-	{ "keys": ["ctrl+q"], "command": "go_to_last_edit" }
+	{ "keys": ["ctrl+q"], "command": "go_to_last_edit" },
+
+  { "keys": ["#"], "command": "insert_snippet", "args": {"contents": "#{${0:$SELECTION}}"}, "context":
+    [
+      { "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+      { "key": "selection_empty", "operator": "equal", "operand": false, "match_all": true }
+    ]
+  },
+  { "keys": ["alt+;"], "command": "run_macro_file", "args": {"file": "Packages/User/semicolon_end_of_line.sublime-macro"} },
+  { "keys": ["alt+,"], "command": "run_macro_file", "args": {"file": "Packages/User/comma_end_of_line.sublime-macro"} }
 ]
